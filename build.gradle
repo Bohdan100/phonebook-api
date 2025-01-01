@@ -44,8 +44,11 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.jupiter', module: 'junit-jupiter-engine'
 	}
+}
 
-
+bootJar {
+	archiveFileName = "${archiveBaseName.get()}.jar"
+	destinationDirectory = file("$rootDir")
 }
 
 tasks.named('test') {
