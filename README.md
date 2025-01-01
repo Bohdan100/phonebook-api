@@ -84,7 +84,7 @@ Before running the application, follow these steps to set up the database:
    .\gradlew bootRun     (Windows)
    ./gradlew bootRun     (Linux)
 
-3. Build and run the application in terminal using jar file:
+3. Build and run the application in terminal using JAR file:
    ```bash
    .\gradlew bootJar     (Windows)
    ./gradlew bootJar     (Linux)
