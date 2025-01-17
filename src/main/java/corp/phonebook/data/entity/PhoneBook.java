@@ -29,9 +29,4 @@ public class PhoneBook implements Serializable {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "phoneBook")
     private List<Contact> contacts;
-
-    public PhoneBook(User owner, List<Contact> contacts) {
-        this.owner = owner;
-        this.contacts = contacts;
-    }
 }

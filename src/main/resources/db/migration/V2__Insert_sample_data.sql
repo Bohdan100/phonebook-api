@@ -1,11 +1,43 @@
--- Добавление данных в таблицу users
-INSERT INTO users (name, phonebook_id) VALUES
-    ('Alice', 1),
-    ('Bob', 2);
+-- Добавление пользователей
+INSERT INTO users (name, email, password, role) VALUES
+    --password: hashed_password_1
+    ('Alice', 'alice@example.com', '$2b$12$wwjDuaJgfKD8ssTXlGK3nOK.3qqzT2q79K3PZGPFjSRpb4VBSvx5m', 'USER'),
+    --password: hashed_password_2
+    ('Bob', 'bob@example.com', '$2b$12$1XGcDssNHOACVlSTlgaYgu5oI83cVX0mucx0yn1pg/3tKnsCThKES', 'USER'),
+    --password: hashed_password_3
+    ('Charlie', 'charlie@example.com', '$2b$12$8GD8pdTTz3P8DTmW1ORwauDt3lJ/QQgnKDNvT3mbA/9ImB0aG26wO', 'USER'),
+    --password: hashed_password_4
+    ('David', 'david@example.com', '$2b$12$0TfW9wEhUb6nLRJynFM59OdPJcBQDeXeCpp7.DLbUcPc43xSQbHwu', 'ADMIN');
 
--- Добавление данных в таблицу contacts
+-- Добавление контактов для пользователей
+-- Для пользователя с ID 1 (Alice) добавляем 5 контактов
 INSERT INTO contacts (name, number, phonebook_id) VALUES
     ('John Doe', '+71234567890', 1),
     ('Jane Smith', '+81234567891', 1),
-    ('Mike Johnson', '+7 1234567892', 2),
-    ('Anna Brown', '+8 1234567893', 2);
+    ('Mike Johnson', '+7 1234567892', 1),
+    ('Anna Brown', '+8 1234567893', 1),
+    ('Chris Black', '+9 1234567894', 1);
+
+-- Для пользователя с ID 2 (Bob) добавляем 5 контактов
+INSERT INTO contacts (name, number, phonebook_id) VALUES
+    ('Sarah White', '+71234567892', 2),
+    ('George Martin', '+81234567893', 2),
+    ('Lucas Green', '+7 1234567893', 2),
+    ('Nina Roberts', '+8 1234567894', 2),
+    ('Liam Davis', '+9 1234567895', 2);
+
+-- Для пользователя с ID 3 (Charlie) добавляем 5 контактов
+INSERT INTO contacts (name, number, phonebook_id) VALUES
+    ('Olivia Clark', '+71234567894', 3),
+    ('Mason Harris', '+81234567895', 3),
+    ('Isabella Lewis', '+7 1234567894', 3),
+    ('Ethan Walker', '+8 1234567896', 3),
+    ('Ava King', '+9 1234567897', 3);
+
+-- Для пользователя с ID 4 (David) добавляем 5 контактов
+INSERT INTO contacts (name, number, phonebook_id) VALUES
+    ('Sophia Young', '+71234567896', 4),
+    ('Lily Scott', '+81234567897', 4),
+    ('Jacob Evans', '+7 1234567895', 4),
+    ('Amelia Turner', '+8 1234567898', 4),
+    ('Matthew Nelson', '+9 1234567899', 4);

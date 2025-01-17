@@ -12,5 +12,5 @@ public interface PhoneBookRepository extends JpaRepository<PhoneBook, Long> {
     PhoneBook findPhoneBookByOwner_Id(@Param("ownerId") Long ownerId);
 
     @Query("SELECT pb FROM PhoneBook pb WHERE pb.id = :id")
-    PhoneBook findPhonebookById(@Param("id") long id);
+    PhoneBook findPhoneBookById(@Param("id") long id);
 }

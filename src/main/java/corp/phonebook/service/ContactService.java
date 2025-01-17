@@ -1,7 +1,7 @@
 package corp.phonebook.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import corp.phonebook.data.repository.ContactRepository;
 import corp.phonebook.data.repository.PhoneBookRepository;
 
@@ -10,12 +10,11 @@ import corp.phonebook.data.entity.Contact;
 import corp.phonebook.data.entity.PhoneBook;
 
 @Service
+@AllArgsConstructor
 public class ContactService {
-    @Autowired
-    ContactRepository contactRepository;
+    private final ContactRepository contactRepository;
 
-    @Autowired
-    PhoneBookRepository phoneBookRepository;
+    private final PhoneBookRepository phoneBookRepository;
 
     public Contact get(Long id) {
             return contactRepository.findContactById(id);
@@ -26,7 +25,7 @@ public class ContactService {
     }
 
     public Contact create(ContactDTO contactDTO) {
-        PhoneBook phoneBook = phoneBookRepository.findPhonebookById(contactDTO.getPhonebookId());
+        PhoneBook phoneBook = phoneBookRepository.findPhoneBookById(contactDTO.getPhonebookId());
         Contact contact = Contact.builder()
                 .name(contactDTO.getName())
                 .number(contactDTO.getNumber())
@@ -36,7 +35,7 @@ public class ContactService {
         return contactRepository.save(contact);
     }
 
-    public void update(Long id, Contact newContact) {
+    public Contact update(Long id, Contact newContact) {
         Contact contactFromDB = contactRepository.findContactById(id);
         if (newContact.getName() != null && !newContact.getName().isEmpty()) {
             contactFromDB.setName(newContact.getName());
@@ -45,7 +44,7 @@ public class ContactService {
             contactFromDB.setNumber(newContact.getNumber());
         }
 
-        contactRepository.save(contactFromDB);
+        return contactRepository.save(contactFromDB);
     }
     
     public void delete(Long id) {

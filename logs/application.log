@@ -1,117 +1,371 @@
-2025-01-06T03:40:11.136+02:00  INFO 13040 --- [phonebook-api] [main] corp.phonebook.PhonebookApplication      : Starting PhonebookApplication v0.0.1-SNAPSHOT using Java 21.0.4 with PID 13040 (C:\Users\Dell\Desktop\Java-projects\github-bohdan100-repo\phonebook-api\phonebook-api.jar started by Dell in C:\Users\Dell\Desktop\Java-projects\github-bohdan100-repo\phonebook-api)
-2025-01-06T03:40:11.138+02:00  INFO 13040 --- [phonebook-api] [main] corp.phonebook.PhonebookApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-01-06T03:40:11.754+02:00  INFO 13040 --- [phonebook-api] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-01-06T03:40:11.819+02:00  INFO 13040 --- [phonebook-api] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 3 JPA repository interfaces.
-2025-01-06T03:40:12.366+02:00  INFO 13040 --- [phonebook-api] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-01-06T03:40:12.389+02:00  INFO 13040 --- [phonebook-api] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-01-06T03:40:12.389+02:00  INFO 13040 --- [phonebook-api] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2025-01-06T03:40:12.421+02:00  INFO 13040 --- [phonebook-api] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-01-06T03:40:12.421+02:00  INFO 13040 --- [phonebook-api] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1240 ms
-2025-01-06T03:40:12.644+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.classpath.ClassPathScanner     : Scanning for classpath resources at 'classpath:db/callback' ...
-2025-01-06T03:40:12.644+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.classpath.ClassPathScanner     : Determining location urls for classpath:db/callback using ClassLoader org.springframework.boot.loader.launch.LaunchedClassLoader@c4437c4 ...
-2025-01-06T03:40:12.644+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.classpath.ClassPathScanner     : Unable to resolve location classpath:db/callback.
-2025-01-06T03:40:12.644+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.classpath.ClassPathScanner     : Scanning for classpath resources at 'classpath:db/migration' ...
-2025-01-06T03:40:12.644+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.classpath.ClassPathScanner     : Determining location urls for classpath:db/migration using ClassLoader org.springframework.boot.loader.launch.LaunchedClassLoader@c4437c4 ...
-2025-01-06T03:40:12.644+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.classpath.ClassPathScanner     : Scanning URL: jar:nested:/C:/Users/Dell/Desktop/Java-projects/github-bohdan100-repo/phonebook-api/phonebook-api.jar/!BOOT-INF/classes/!/db/migration
-2025-01-06T03:40:12.644+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.classpath.ClassPathScanner     : Found resource: db/migration/
-2025-01-06T03:40:12.644+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.classpath.ClassPathScanner     : Found resource: db/migration/V1__Create_tables.sql
-2025-01-06T03:40:12.644+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.classpath.ClassPathScanner     : Found resource: db/migration/V2__Insert_sample_data.sql
-2025-01-06T03:40:12.644+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.classpath.ClassPathScanner     : Scanning for classes at classpath:db/migration
-2025-01-06T03:40:12.662+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/ (filename: )
-2025-01-06T03:40:12.662+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.resource.ResourceNameValidator   : Validating V1__Create_tables.sql
-2025-01-06T03:40:12.662+02:00  INFO 13040 --- [phonebook-api] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-01-06T03:40:12.851+02:00  INFO 13040 --- [phonebook-api] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7015ebef
-2025-01-06T03:40:12.851+02:00  INFO 13040 --- [phonebook-api] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-01-06T03:40:12.867+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.resource.ResourceNameValidator   : Validating V2__Insert_sample_data.sql
-2025-01-06T03:40:12.883+02:00  INFO 13040 --- [phonebook-api] [main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5432/phonebook (PostgreSQL 16.6)
-2025-01-06T03:40:12.883+02:00 DEBUG 13040 --- [phonebook-api] [main] org.flywaydb.core.FlywayExecutor         : Driver: PostgreSQL JDBC Driver 42.7.4
-2025-01-06T03:40:12.883+02:00 DEBUG 13040 --- [phonebook-api] [main] org.flywaydb.core.FlywayExecutor         : DDL Transactions Supported: true
-2025-01-06T03:40:12.883+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.SchemaHistoryFactory           : Schemas: 
-2025-01-06T03:40:12.883+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.s.SchemaHistoryFactory           : Default schema: null
-2025-01-06T03:40:12.883+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.i.c.SqlScriptCallbackFactory       : Scanning for SQL callbacks ...
-2025-01-06T03:40:12.883+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/ (filename: )
-2025-01-06T03:40:12.899+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.core.internal.command.DbValidate     : Validating migrations ...
-2025-01-06T03:40:12.899+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.a.c.ClassicConfiguration           : CherryPickConfigurationExtension not found
-2025-01-06T03:40:12.899+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/ (filename: )
-2025-01-06T03:40:12.915+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/ (filename: )
-2025-01-06T03:40:12.919+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/V1__Create_tables.sql (filename: V1__Create_tables.sql)
-2025-01-06T03:40:12.919+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/V2__Insert_sample_data.sql (filename: V2__Insert_sample_data.sql)
-2025-01-06T03:40:12.919+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/ (filename: )
-2025-01-06T03:40:12.919+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/V1__Create_tables.sql (filename: V1__Create_tables.sql)
-2025-01-06T03:40:12.921+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/V2__Insert_sample_data.sql (filename: V2__Insert_sample_data.sql)
-2025-01-06T03:40:12.935+02:00  INFO 13040 --- [phonebook-api] [main] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.033s)
-2025-01-06T03:40:12.935+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.core.internal.command.DbSchemas      : Skipping creation of existing schema: "public"
-2025-01-06T03:40:13.000+02:00 DEBUG 13040 --- [phonebook-api] [main] o.f.c.a.c.ClassicConfiguration           : CherryPickConfigurationExtension not found
-2025-01-06T03:40:13.002+02:00  INFO 13040 --- [phonebook-api] [main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 2
-2025-01-06T03:40:13.008+02:00  INFO 13040 --- [phonebook-api] [main] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
-2025-01-06T03:40:13.012+02:00 DEBUG 13040 --- [phonebook-api] [main] org.flywaydb.core.FlywayExecutor         : Memory usage: 26 of 60M
-2025-01-06T03:40:13.089+02:00  INFO 13040 --- [phonebook-api] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-01-06T03:40:13.136+02:00  INFO 13040 --- [phonebook-api] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2025-01-06T03:40:13.186+02:00  INFO 13040 --- [phonebook-api] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-01-06T03:40:13.480+02:00  INFO 13040 --- [phonebook-api] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-01-06T03:40:13.528+02:00  WARN 13040 --- [phonebook-api] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-01-06T03:40:14.218+02:00  INFO 13040 --- [phonebook-api] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-01-06T03:40:14.218+02:00  INFO 13040 --- [phonebook-api] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-01-06T03:40:14.475+02:00  INFO 13040 --- [phonebook-api] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-01-06T03:40:15.009+02:00  WARN 13040 --- [phonebook-api] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-01-06T03:40:15.334+02:00  INFO 13040 --- [phonebook-api] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-01-06T03:40:15.344+02:00  INFO 13040 --- [phonebook-api] [main] corp.phonebook.PhonebookApplication      : Started PhonebookApplication in 4.64 seconds (process running for 5.063)
-2025-01-06T03:41:37.989+02:00  INFO 13040 --- [phonebook-api] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-01-06T03:41:37.989+02:00  INFO 13040 --- [phonebook-api] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-01-06T03:41:37.989+02:00  INFO 13040 --- [phonebook-api] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2025-01-06T03:41:46.641+02:00  WARN 13040 --- [phonebook-api] [http-nio-8080-exec-2] o.s.web.servlet.PageNotFound             : Request method 'GET' is not supported
-2025-01-06T03:43:07.639+02:00 DEBUG 13040 --- [phonebook-api] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
-    select
-        pb1_0.id 
-    from
-        phonebooks pb1_0
-2025-01-06T03:43:07.655+02:00 DEBUG 13040 --- [phonebook-api] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+2025-01-18T01:14:13.052+02:00  INFO 6156 --- [phonebook-api] [restartedMain] corp.phonebook.PhonebookApplication      : Starting PhonebookApplication using Java 21.0.4 with PID 6156 (C:\Users\Dell\Desktop\Java-projects\github-bohdan100-repo\phonebook-api-comments-token-session\build\classes\java\main started by Dell in C:\Users\Dell\Desktop\Java-projects\github-bohdan100-repo\phonebook-api-comments-token-session)
+2025-01-18T01:14:13.068+02:00  INFO 6156 --- [phonebook-api] [restartedMain] corp.phonebook.PhonebookApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-01-18T01:14:13.113+02:00  INFO 6156 --- [phonebook-api] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-01-18T01:14:13.113+02:00  INFO 6156 --- [phonebook-api] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-01-18T01:14:13.766+02:00  INFO 6156 --- [phonebook-api] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-18T01:14:13.829+02:00  INFO 6156 --- [phonebook-api] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 4 JPA repository interfaces.
+2025-01-18T01:14:14.518+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-01-18T01:14:14.532+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-01-18T01:14:14.532+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2025-01-18T01:14:14.586+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-01-18T01:14:14.586+02:00  INFO 6156 --- [phonebook-api] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1473 ms
+2025-01-18T01:14:14.618+02:00  INFO 6156 --- [phonebook-api] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-01-18T01:14:14.807+02:00  INFO 6156 --- [phonebook-api] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4d7bc45f
+2025-01-18T01:14:14.809+02:00  INFO 6156 --- [phonebook-api] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-01-18T01:14:14.827+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:postgresql://localhost:5432/phonebook'
+2025-01-18T01:14:15.012+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.s.classpath.ClassPathScanner     : Scanning for classpath resources at 'classpath:db/callback' ...
+2025-01-18T01:14:15.012+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.s.classpath.ClassPathScanner     : Determining location urls for classpath:db/callback using ClassLoader TomcatEmbeddedWebappClassLoader
+  context: ROOT
+  delegate: true
+----------> Parent Classloader:
+org.springframework.boot.devtools.restart.classloader.RestartClassLoader@38987d36
+ ...
+2025-01-18T01:14:15.012+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.s.classpath.ClassPathScanner     : Unable to resolve location classpath:db/callback.
+2025-01-18T01:14:15.012+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.s.classpath.ClassPathScanner     : Scanning for classpath resources at 'classpath:db/migration' ...
+2025-01-18T01:14:15.012+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.s.classpath.ClassPathScanner     : Determining location urls for classpath:db/migration using ClassLoader TomcatEmbeddedWebappClassLoader
+  context: ROOT
+  delegate: true
+----------> Parent Classloader:
+org.springframework.boot.devtools.restart.classloader.RestartClassLoader@38987d36
+ ...
+2025-01-18T01:14:15.020+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.s.classpath.ClassPathScanner     : Scanning URL: file:/C:/Users/Dell/Desktop/Java-projects/github-bohdan100-repo/phonebook-api-comments-token-session/build/resources/main/db/migration
+2025-01-18T01:14:15.020+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] i.s.c.FileSystemClassPathLocationScanner : Scanning starting at classpath root in filesystem: C:\Users\Dell\Desktop\Java-projects\github-bohdan100-repo\phonebook-api-comments-token-session\build\resources\main\
+2025-01-18T01:14:15.020+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] i.s.c.FileSystemClassPathLocationScanner : Scanning for resources in path: C:\Users\Dell\Desktop\Java-projects\github-bohdan100-repo\phonebook-api-comments-token-session\build\resources\main\db\migration (db/migration)
+2025-01-18T01:14:15.022+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.s.classpath.ClassPathScanner     : Found resource: db/migration/V1__Create_tables.sql
+2025-01-18T01:14:15.022+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.s.classpath.ClassPathScanner     : Found resource: db/migration/V2__Insert_sample_data.sql
+2025-01-18T01:14:15.022+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.s.classpath.ClassPathScanner     : Scanning for classes at classpath:db/migration
+2025-01-18T01:14:15.027+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.resource.ResourceNameValidator   : Validating V1__Create_tables.sql
+2025-01-18T01:14:15.044+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.resource.ResourceNameValidator   : Validating V2__Insert_sample_data.sql
+2025-01-18T01:14:15.044+02:00  INFO 6156 --- [phonebook-api] [restartedMain] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5432/phonebook (PostgreSQL 16.6)
+2025-01-18T01:14:15.044+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] org.flywaydb.core.FlywayExecutor         : Driver: PostgreSQL JDBC Driver 42.7.4
+2025-01-18T01:14:15.044+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] org.flywaydb.core.FlywayExecutor         : DDL Transactions Supported: true
+2025-01-18T01:14:15.044+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.s.SchemaHistoryFactory           : Schemas: 
+2025-01-18T01:14:15.044+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.s.SchemaHistoryFactory           : Default schema: null
+2025-01-18T01:14:15.062+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.i.c.SqlScriptCallbackFactory       : Scanning for SQL callbacks ...
+2025-01-18T01:14:15.077+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.core.internal.command.DbValidate     : Validating migrations ...
+2025-01-18T01:14:15.080+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.a.c.ClassicConfiguration           : CherryPickConfigurationExtension not found
+2025-01-18T01:14:15.083+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/V1__Create_tables.sql (filename: V1__Create_tables.sql)
+2025-01-18T01:14:15.083+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/V2__Insert_sample_data.sql (filename: V2__Insert_sample_data.sql)
+2025-01-18T01:14:15.083+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/V1__Create_tables.sql (filename: V1__Create_tables.sql)
+2025-01-18T01:14:15.083+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.core.internal.scanner.Scanner        : Filtering out resource: db/migration/V2__Insert_sample_data.sql (filename: V2__Insert_sample_data.sql)
+2025-01-18T01:14:15.099+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.032s)
+2025-01-18T01:14:15.099+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.core.internal.command.DbSchemas      : Skipping creation of existing schema: "public"
+2025-01-18T01:14:15.118+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] o.f.c.a.c.ClassicConfiguration           : CherryPickConfigurationExtension not found
+2025-01-18T01:14:15.118+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 2
+2025-01-18T01:14:15.118+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2025-01-18T01:14:15.118+02:00 DEBUG 6156 --- [phonebook-api] [restartedMain] org.flywaydb.core.FlywayExecutor         : Memory usage: 38 of 68M
+2025-01-18T01:14:15.198+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-18T01:14:15.239+02:00  INFO 6156 --- [phonebook-api] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-01-18T01:14:15.271+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-01-18T01:14:15.563+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-18T01:14:15.611+02:00  WARN 6156 --- [phonebook-api] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-01-18T01:14:16.360+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-18T01:14:16.376+02:00  INFO 6156 --- [phonebook-api] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-18T01:14:16.738+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-18T01:14:17.286+02:00  WARN 6156 --- [phonebook-api] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-01-18T01:14:17.831+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-01-18T01:14:17.865+02:00  INFO 6156 --- [phonebook-api] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-01-18T01:14:17.875+02:00  INFO 6156 --- [phonebook-api] [restartedMain] corp.phonebook.PhonebookApplication      : Started PhonebookApplication in 5.174 seconds (process running for 5.545)
+2025-01-18T01:14:38.739+02:00  INFO 6156 --- [phonebook-api] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-18T01:14:38.739+02:00  INFO 6156 --- [phonebook-api] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-01-18T01:14:38.741+02:00  INFO 6156 --- [phonebook-api] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-01-18T01:14:38.995+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
     select
         u1_0.id,
+        u1_0.email,
         u1_0.name,
-        u1_0.phonebook_id 
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
     from
         users u1_0 
     where
-        u1_0.phonebook_id=?
-2025-01-06T03:43:07.671+02:00 DEBUG 13040 --- [phonebook-api] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+        u1_0.email=?
+2025-01-18T01:14:39.229+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    update
+        users 
+    set
+        email=?,
+        name=?,
+        password=?,
+        phonebook_id=?,
+        role=?,
+        session_expiration=?,
+        session_id=?,
+        token=? 
+    where
+        id=?
+2025-01-18T01:14:53.303+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
     select
         u1_0.id,
+        u1_0.email,
         u1_0.name,
-        u1_0.phonebook_id 
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
     from
         users u1_0 
     where
-        u1_0.phonebook_id=?
-2025-01-06T03:44:48.893+02:00 DEBUG 13040 --- [phonebook-api] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+        u1_0.session_id=?
+2025-01-18T01:14:53.352+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-01-18T01:14:53.386+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
+    select
+        c1_0.id,
+        c1_0.name,
+        c1_0.number,
+        c1_0.phonebook_id 
+    from
+        contacts c1_0 
+    where
+        c1_0.id=?
+2025-01-18T01:14:53.395+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
     select
         pb1_0.id 
     from
         phonebooks pb1_0 
-    join
-        users o1_0 
-            on pb1_0.id=o1_0.phonebook_id 
     where
-        o1_0.id=?
-2025-01-06T03:44:48.900+02:00 DEBUG 13040 --- [phonebook-api] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+        pb1_0.id=?
+2025-01-18T01:14:53.407+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
     select
         u1_0.id,
+        u1_0.email,
         u1_0.name,
-        u1_0.phonebook_id 
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
     from
         users u1_0 
     where
         u1_0.phonebook_id=?
-2025-01-06T03:44:48.900+02:00 DEBUG 13040 --- [phonebook-api] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+2025-01-18T01:15:04.403+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
     select
-        c1_0.phonebook_id,
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
+    from
+        users u1_0 
+    where
+        u1_0.session_id=?
+2025-01-18T01:15:04.416+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        pb1_0.id 
+    from
+        phonebooks pb1_0 
+    where
+        pb1_0.id=?
+2025-01-18T01:15:04.417+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
+    from
+        users u1_0 
+    where
+        u1_0.phonebook_id=?
+2025-01-18T01:15:04.419+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        pb1_0.id 
+    from
+        phonebooks pb1_0 
+    where
+        pb1_0.id=?
+2025-01-18T01:15:04.420+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
+    from
+        users u1_0 
+    where
+        u1_0.phonebook_id=?
+2025-01-18T01:15:22.909+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
+    from
+        users u1_0 
+    where
+        u1_0.session_id=?
+2025-01-18T01:15:22.914+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        pb1_0.id 
+    from
+        phonebooks pb1_0 
+    where
+        pb1_0.id=?
+2025-01-18T01:15:22.916+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        pb1_0.id 
+    from
+        phonebooks pb1_0 
+    where
+        pb1_0.id=?
+2025-01-18T01:15:22.916+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
+    from
+        users u1_0 
+    where
+        u1_0.phonebook_id=?
+2025-01-18T01:15:29.042+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
+    from
+        users u1_0 
+    where
+        u1_0.session_id=?
+2025-01-18T01:15:29.047+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        pb1_0.id 
+    from
+        phonebooks pb1_0 
+    where
+        pb1_0.id=?
+2025-01-18T01:15:29.048+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
+    from
+        users u1_0 
+    where
+        u1_0.phonebook_id=?
+2025-01-18T01:15:29.050+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        pb1_0.id 
+    from
+        phonebooks pb1_0 
+    where
+        pb1_0.id=?
+2025-01-18T01:15:29.051+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        pb1_0.id 
+    from
+        phonebooks pb1_0 
+    where
+        pb1_0.id=?
+2025-01-18T01:15:29.060+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    insert 
+    into
+        contacts
+        (name, number, phonebook_id) 
+    values
+        (?, ?, ?) 
+    returning id
+2025-01-18T01:15:44.751+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
+    from
+        users u1_0 
+    where
+        u1_0.session_id=?
+2025-01-18T01:15:44.756+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
         c1_0.id,
         c1_0.name,
-        c1_0.number 
+        c1_0.number,
+        c1_0.phonebook_id 
     from
         contacts c1_0 
     where
-        c1_0.phonebook_id=?
-2025-01-06T03:45:10.151+02:00  INFO 13040 --- [phonebook-api] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-01-06T03:45:10.151+02:00  INFO 13040 --- [phonebook-api] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-01-06T03:45:10.151+02:00  INFO 13040 --- [phonebook-api] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+        c1_0.id=?
+2025-01-18T01:15:44.758+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        pb1_0.id 
+    from
+        phonebooks pb1_0 
+    where
+        pb1_0.id=?
+2025-01-18T01:15:44.760+02:00 DEBUG 6156 --- [phonebook-api] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phonebook_id,
+        u1_0.role,
+        u1_0.session_expiration,
+        u1_0.session_id,
+        u1_0.token 
+    from
+        users u1_0 
+    where
+        u1_0.phonebook_id=?

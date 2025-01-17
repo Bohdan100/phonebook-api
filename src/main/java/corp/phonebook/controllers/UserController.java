@@ -1,104 +1,108 @@
 package corp.phonebook.controllers;
 
-import corp.phonebook.data.entity.Contact;
-import corp.phonebook.data.entity.User;
-import corp.phonebook.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
+
+import corp.phonebook.service.UserService;
+import corp.phonebook.data.entity.User;
+import corp.phonebook.data.dto.UserDTO;
 
 import static corp.phonebook.constants.Constants.VERSION;
 import static corp.phonebook.validation.Validation.requireNull;
 
-// json objects
 @RestController
+@AllArgsConstructor
 @RequestMapping(VERSION + "phonebooks/users")
 public class UserController {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    // GET all users  http://localhost:8080/api/v1/phonebooks/users/owners
+    // GET all owners of phonebooks  http://localhost:8080/api/v1/phonebooks/users/owners
+    @Secured("ROLE_ADMIN")
     @GetMapping(value = "/owners")
-    public ResponseEntity<List<User>> list() {
-        List<User> users = userService.getAllOwners();
-        if (users.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> getAllOwnersOfPhonebooks(
+            @AuthenticationPrincipal User user) {
+        List<User> ownersOfPhonebooks = userService.getAllOwners();
+        if (ownersOfPhonebooks.isEmpty()) {
+            return ResponseEntity.status(404).body("No owners found.");
         } else {
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        }
-    }
-
-    // GET user contacts by id  http://localhost:8080/api/v1/phonebooks/users/2/contacts
-    @GetMapping(value = "{id}/contacts")
-    public ResponseEntity<List<Contact>> getAllUserContacts(@PathVariable("id") Long id) {
-        List<Contact> allUserContacts = userService.getAllUserContacts(id);
-        if (allUserContacts.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<>(allUserContacts, HttpStatus.OK);
+            return ResponseEntity.ok(ownersOfPhonebooks);
         }
     }
 
     // GET user by name  http://localhost:8080/api/v1/phonebooks/users/names/Bob
-    @GetMapping(value = {"names/{name}"})
-    public ResponseEntity<List<User>> getUserByName(@PathVariable("name") String name) {
-        List<User> user = userService.getByName(name);
-        if (requireNull(user)) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<>(user, HttpStatus.OK);
+    @Secured("ROLE_ADMIN")
+    @GetMapping(value = {"/names/{name}"})
+    public ResponseEntity<?> getUserByName(
+            @PathVariable("name") String name,
+            @AuthenticationPrincipal User user) {
+        List<User> users = userService.getByName(name);
+        if (users == null || users.isEmpty()) {
+            return ResponseEntity.status(404).body("No users found with name: " + name);
         }
+        return ResponseEntity.ok(users);
     }
 
     // GET user by id  http://localhost:8080/api/v1/phonebooks/users/2
     @GetMapping(value = "{id}")
-    public ResponseEntity<User> getOne(@PathVariable("id") Long id) {
-        User user = userService.get(id);
-        if (requireNull(user)) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<?> getOne(
+            @PathVariable("id") Long id,
+            @AuthenticationPrincipal User user) {
+        if (!id.equals(user.getId())) {
+            return ResponseEntity.status(403).body("Access denied: User ID does not match the authenticated user's ID.");
+        }
+
+        User foundUser = userService.getById(id);
+        if (requireNull(foundUser)) {
+            return ResponseEntity.status(404).body("User not found.");
+        }
+
+        return ResponseEntity.ok(foundUser);
+    }
+
+    // UPDATE user by id  http://localhost:8080/api/v1/phonebooks/users/1
+    // {"name": "Alice + Bob" }  {"name": "Alice + Bob", "email": "newSharedEmail@gmail.com" }
+    @PutMapping(value = "{id}")
+    public ResponseEntity<?> update(
+            @PathVariable("id") Long id,
+            @RequestBody UserDTO userDTO,
+            @AuthenticationPrincipal User user) {
+        if (!id.equals(user.getId())) {
+            return ResponseEntity.status(403).body("Access denied: User ID does not match the authenticated user's ID.");
+        }
+
+        if (userDTO == null || (userDTO.getName() == null && userDTO.getEmail() == null)) {
+            return ResponseEntity.badRequest().body("Invalid input: At least one field must be provided.");
+        }
+
+        try {
+            User updatedUser = userService.update(id, userDTO);
+            return ResponseEntity.ok(updatedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(409).body(e.getMessage());
         }
     }
 
     // DELETE user by id  http://localhost:8080/api/v1/phonebooks/users/2
     @DeleteMapping(value = "{id}")
-    public ResponseEntity<User> delete(@PathVariable("id") Long id) {
+    public ResponseEntity<?> delete(
+            @PathVariable("id") Long id,
+            @AuthenticationPrincipal User user) {
+        if (!id.equals(user.getId())) {
+            return ResponseEntity.status(403).body("Access denied: You cannot delete another user.");
+        }
+
         if (!userService.isExist(id)) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            userService.delete(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return ResponseEntity.status(404).body("User not found with id: " + id);
         }
-    }
 
-    // CREATE user  http://localhost:8080/api/v1/phonebooks/users
-    // { "name": "Goodwin" }
-    @PostMapping
-    public ResponseEntity<User> create(@RequestBody User user) {
-        if (requireNull(user)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } else {
-            userService.create(user);
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
-        }
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
-
-    // UPDATE user by id  http://localhost:8080/api/v1/phonebooks/users/1
-    // { "id": 1, "name": "Alice + Bob" }
-    @PutMapping(value = "{id}")
-    public ResponseEntity<User> update(@PathVariable("id") Long id, @RequestBody User user) {
-        if (requireNull(user)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } else {
-            userService.update(id, user);
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        }
-    }
-
 }
 

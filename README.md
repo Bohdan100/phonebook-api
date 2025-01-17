@@ -1,12 +1,15 @@
 # Phonebook Application
-The **Phonebook Application** is a demonstration project that provides a simple implementation of a digital phonebook for managing contacts. It showcases modern development practices using Spring Boot and integrates robust database management and testing tools.
+The **Phonebook Application** is a Spring Boot application that provides RESTful API endpoints for managing contacts in a digital phonebook. The application features its own user authentication mechanism utilizing tokens and session identifiers. The AuthAPI includes endpoints for user registration, login, and logout. Users can create, edit, or delete contacts and search for them based on various criteria. All data is securely stored in a PostgreSQL database.
 
 ## Features
-- Add, update, view, and delete contacts.
-- Persist contact information using PostgreSQL.
-- Handle database migrations with Flyway.
-- Simplify setup and build processes with Gradle.
-- Streamline code using Lombok to reduce boilerplate.
+- Authentication API powered by **Spring Security**, featuring a custom **JWT filter**.
+- Secure, token-based authentication implemented using **JWT (JSON Web Tokens)**.
+- Session management with session expiration checks, integrated via **cookies**.
+- CRUD operations for contacts (add, update, view, and delete) available through RESTful API endpoints.
+- Structured and organized data storage backed by **PostgreSQL**.
+- DEfficient database versioning and migrations with **Flyway**.
+- Reduced boilerplate code through the use of **Lombok**.
+- Streamlined setup and build processes using **Gradle**.
 - Ensure code quality and correctness with JUnit 5 tests.
 
 ## Requirements
@@ -20,7 +23,6 @@ The application is built using the following technologies:
 - **Gradle**: 8.8
 
 ## Database Setup
-
 Before running the application, follow these steps to set up the database:
 
 1. **Create a PostgreSQL 16 Database**  
@@ -31,40 +33,13 @@ Before running the application, follow these steps to set up the database:
 
     1. Create a new user with a password:
        ```sql
-       CREATE USER admin WITH PASSWORD 'secret1234';
+       CREATE USER IF NOT EXISTS admin WITH PASSWORD 'secret1234';
        ```
 
-    2. Create a new database:
+    2. Create a new database and 
+       assign ownership of the database to the new user:
        ```sql
-       CREATE DATABASE phonebook;
-       ```
-
-    3. Assign ownership of the database to the new user:
-       ```sql
-       ALTER DATABASE phonebook OWNER TO admin;
-       ```
-
-    4. Connect to the newly created database:
-       ```sql
-       \c phonebook
-       ```
-
-    5. Grant schema usage and creation privileges to the user:
-       ```sql
-       GRANT USAGE ON SCHEMA public TO admin;
-       GRANT CREATE ON SCHEMA public TO admin;
-       ```
-
-    6. Grant all privileges on tables and sequences in the schema:
-       ```sql
-       GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin;
-       GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO admin;
-       ```
-
-    7. Configure default privileges for new tables and sequences:
-       ```sql
-       ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO admin;
-       ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO admin;
+       CREATE DATABASE phonebook ENCODING 'UTF8' OWNER admin;
        ```
 
 3. **Connect to the Database**  
@@ -90,3 +65,21 @@ Before running the application, follow these steps to set up the database:
    ./gradlew bootJar     (Linux)
    
    java -jar phonebook-api.jar
+
+4. Make your HTTPS requests using the following endpoints (e.g., via **Postman**):
+    - **Register**: [http://localhost:8080/api/v1/auth/register](http://localhost:8080/api/v1/auth/register)
+    - **Login**: [http://localhost:8080/api/v1/auth/login](http://localhost:8080/api/v1/auth/login)
+    - **Logout**: [http://localhost:8080/api/v1/auth/logout](http://localhost:8080/api/v1/auth/logout)
+    - **Contacts** (Requires a Bearer Token in the Authorization header and a valid "SESSION_ID" cookie):
+        - Get contact list by user id: [http://localhost:8080/api/v1/phonebooks/contacts/user/{id}](http://localhost:8080/api/v1/phonebooks/contacts/user/{id})
+        - Get by id: [http://localhost:8080/api/v1/phonebooks/contacts/{id}](http://localhost:8080/api/v1/phonebooks/contacts/{id})
+        - Get by number: [http://localhost:8080/api/v1/phonebooks/contacts/number/{fullNumber}](http://localhost:8080/api/v1/phonebooks/contacts/number/{fullNumber})
+        - Create: [http://localhost:8080/api/v1/phonebooks/contacts](http://localhost:8080/api/v1/phonebooks/contacts)
+        - Update: [http://localhost:8080/api/v1/phonebooks/contacts/{id}](http://localhost:8080/api/v1/phonebooks/contacts/{id})
+        - Delete: [http://localhost:8080/api/v1/phonebooks/contacts/{id}](http://localhost:8080/api/v1/phonebooks/contacts/{id})
+    - **Users**:
+        - Get by id: [http://localhost:8080/api/v1/phonebooks/users/{id}](http://localhost:8080/api/v1/phonebooks/users/{id})
+        - Get by name: [http://localhost:8080/api/v1/phonebooks/users/names/{name}](http://localhost:8080/api/v1/phonebooks/users/names/{name})
+        - Get list: [http://localhost:8080/api/v1/phonebooks/users/owners](http://localhost:8080/api/v1/phonebooks/users/owners)
+        - Update by id: [http://localhost:8080/api/v1/phonebooks/users/{id}](http://localhost:8080/api/v1/phonebooks/users/{id})
+        - Delete by id: [http://localhost:8080/api/v1/phonebooks/users/{id}](http://localhost:8080/api/v1/phonebooks/users/{id})
