@@ -50,7 +50,7 @@ public class AuthService {
         }
 
         user.setSessionId(sessionId);
-        // к текущему времени добавляем durationMinutes - 20 минут и записываем в БД время на 20 минут больше
+
         user.setSessionExpiration(LocalDateTime.now().plusMinutes(20));
 
         String token = jwtService.generateToken(user.getEmail());
