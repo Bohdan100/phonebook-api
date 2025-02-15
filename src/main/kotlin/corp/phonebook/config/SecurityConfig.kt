@@ -11,6 +11,7 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import corp.phonebook.constants.Constants.VERSION
 
 @Configuration
 @EnableWebSecurity
@@ -25,7 +26,7 @@ class SecurityConfig(
         http
             .authorizeHttpRequests { requests ->
                 requests
-                    .requestMatchers("/api/v1/auth/**").permitAll()
+                    .requestMatchers("$VERSION/auth/**").permitAll()
                     .anyRequest().authenticated()
             }
             .csrf { csrf -> csrf.disable() }

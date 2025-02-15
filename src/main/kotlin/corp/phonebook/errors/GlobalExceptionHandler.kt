@@ -17,7 +17,6 @@ import kotlin.collections.LinkedHashMap
 @ControllerAdvice
 @Order(2)
 class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
-
     @ExceptionHandler(EmailAlreadyExistsException::class)
     fun handleEmailAlreadyExistsException(ex: EmailAlreadyExistsException, request: WebRequest): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
