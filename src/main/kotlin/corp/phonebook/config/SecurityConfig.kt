@@ -20,7 +20,6 @@ class SecurityConfig(
     private val sessionAuthFilter: SessionAuthFilter,
     private val customErrorService: CustomErrorService
 ) {
-
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
@@ -36,8 +35,8 @@ class SecurityConfig(
             .addFilterBefore(sessionAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
             .exceptionHandling { exceptions ->
                 exceptions
-                    .authenticationEntryPoint(customErrorService.customUnauthorizedHandler())
-                    .accessDeniedHandler(customErrorService.customAccessDeniedHandler())
+                    .authenticationEntryPoint(customErrorService.unauthorizedHandler())
+                    .accessDeniedHandler(customErrorService.accessDeniedHandler())
             }
 
         return http.build()

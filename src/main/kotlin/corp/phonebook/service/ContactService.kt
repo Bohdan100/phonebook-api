@@ -5,21 +5,30 @@ import corp.phonebook.data.repository.ContactRepository
 import corp.phonebook.data.repository.PhoneBookRepository
 import corp.phonebook.data.dto.ContactDTO
 import corp.phonebook.data.entity.Contact
+import corp.phonebook.errors.ResourceNotFoundException
 
 @Service
 class ContactService(
     private val contactRepository: ContactRepository,
     private val phoneBookRepository: PhoneBookRepository
 ) {
-    fun getById(id: Long): Contact? = contactRepository.findContactById(id)
+    fun getAllContactsOfUser(id: Long): List<Contact> {
+        val phoneBook = phoneBookRepository.findPhoneBookByOwnerId(id)
+        return phoneBook.contacts
+    }
+
+    fun getById(id: Long): Contact = contactRepository.findContactById(id)
+        ?: throw ResourceNotFoundException("Contact not found.")
+
 
     fun getContactsByNumber(number: String, phonebookId: Long): List<Contact> =
         contactRepository.findContactsByNumberContainingAndPhoneBookId(number, phonebookId)
 
     fun create(contactDTO: ContactDTO): Contact {
-        val phoneBook = phoneBookRepository.findPhoneBookById(contactDTO.phonebookId) ?: throw IllegalArgumentException(
-            "PhoneBook not found with id: ${contactDTO.phonebookId}"
-        )
+        val phoneBook =
+            phoneBookRepository.findPhoneBookById(contactDTO.phonebookId) ?: throw ResourceNotFoundException(
+                "PhoneBook not found with id: ${contactDTO.phonebookId}"
+            )
 
         val contact = Contact(
             name = contactDTO.name,
@@ -29,12 +38,15 @@ class ContactService(
         return contactRepository.save(contact)
     }
 
-    fun update(id: Long, newContact: ContactDTO): Contact {
-        val contactFromDB =
-            contactRepository.findContactById(id) ?: throw IllegalArgumentException("Contact not found with id: $id")
+    fun update(id: Long, updateContact: ContactDTO): Contact {
+        if (updateContact.name.isEmpty() && updateContact.number.isEmpty())
+            throw IllegalArgumentException("Invalid input: At least one field must be provided.")
 
-        if (newContact.name.isNotEmpty()) contactFromDB.name = newContact.name
-        if (newContact.number.isNotEmpty()) contactFromDB.number = newContact.number
+        val contactFromDB =
+            contactRepository.findContactById(id) ?: throw ResourceNotFoundException("Contact not found with id: $id")
+
+        if (updateContact.name.isNotEmpty()) contactFromDB.name = updateContact.name
+        if (updateContact.number.isNotEmpty()) contactFromDB.number = updateContact.number
 
         return contactRepository.save(contactFromDB)
     }

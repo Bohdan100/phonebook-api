@@ -60,3 +60,8 @@ allOpen {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+tasks.bootJar {
+	archiveFileName.set("${archiveBaseName.get()}.jar")
+	destinationDirectory.set(file("$rootDir"))
+}

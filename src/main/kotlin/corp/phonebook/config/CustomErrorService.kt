@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse
 @Service
 class CustomErrorService {
 
-    fun customUnauthorizedHandler(): AuthenticationEntryPoint {
+    fun unauthorizedHandler(): AuthenticationEntryPoint {
         return AuthenticationEntryPoint { _, response, _ ->
             response.status = HttpServletResponse.SC_UNAUTHORIZED
             response.contentType = MediaType.APPLICATION_JSON_VALUE
@@ -19,7 +19,7 @@ class CustomErrorService {
         }
     }
 
-    fun customAccessDeniedHandler(): AccessDeniedHandler {
+    fun accessDeniedHandler(): AccessDeniedHandler {
         return AccessDeniedHandler { _, response, accessDeniedException ->
             response.status = HttpServletResponse.SC_FORBIDDEN
             response.contentType = MediaType.APPLICATION_JSON_VALUE

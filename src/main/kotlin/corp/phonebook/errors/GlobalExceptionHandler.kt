@@ -1,8 +1,8 @@
 package corp.phonebook.errors
 
-import org.springframework.web.bind.annotation.ControllerAdvice
+import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.core.annotation.Order
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.context.request.WebRequest
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 import org.springframework.security.access.AccessDeniedException
@@ -11,14 +11,15 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
-import java.util.*
-import kotlin.collections.LinkedHashMap
+import java.util.Date
 
-@ControllerAdvice
-@Order(2)
-class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
+@RestControllerAdvice
+class GlobalExceptionHandler: ResponseEntityExceptionHandler() {
     @ExceptionHandler(EmailAlreadyExistsException::class)
-    fun handleEmailAlreadyExistsException(ex: EmailAlreadyExistsException, request: WebRequest): ResponseEntity<ErrorResponse> {
+    fun handleEmailAlreadyExistsException(
+        ex: EmailAlreadyExistsException,
+        request: WebRequest
+    ): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             status = HttpStatus.CONFLICT.value(),
             error = HttpStatus.CONFLICT.reasonPhrase,
@@ -34,6 +35,17 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         val message: String,
         val timestamp: Date
     )
+
+    @ExceptionHandler(ResourceNotFoundException::class)
+    fun handleResourceNotFoundException(ex: ResourceNotFoundException): ResponseEntity<Any> {
+        val body = LinkedHashMap<String, Any>()
+        body["status"] = HttpStatus.NOT_FOUND.value()
+        body["error"] = "Not Found"
+        body["message"] = ex.message ?: "Resource not found"
+        body["timestamp"] = System.currentTimeMillis()
+
+        return ResponseEntity(body, HttpStatus.NOT_FOUND)
+    }
 
     @ExceptionHandler(AccessDeniedException::class)
     fun handleAccessDeniedException(ex: AccessDeniedException): ResponseEntity<Any> {
@@ -55,6 +67,19 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         body["timestamp"] = System.currentTimeMillis()
 
         return ResponseEntity(body, HttpStatus.BAD_REQUEST)
+    }
+
+    override fun handleMethodArgumentNotValid(
+        ex: MethodArgumentNotValidException,
+        headers: HttpHeaders,
+        status: HttpStatusCode,
+        request: WebRequest
+    ): ResponseEntity<Any> {
+        val errors = HashMap<String, String>()
+        for (error in ex.bindingResult.fieldErrors) {
+            errors[error.field] = error.defaultMessage ?: "Validation error"
+        }
+        return ResponseEntity(errors, HttpStatus.BAD_REQUEST)
     }
 
     override fun handleHttpMessageNotReadable(

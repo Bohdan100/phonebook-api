@@ -20,9 +20,8 @@ class AuthService(
 ) {
 
     fun register(request: RegisterDTO, sessionId: String): User {
-        if (authRepository.findByEmail(request.email).isPresent) {
+        if (authRepository.findByEmail(request.email).isPresent)
             throw EmailAlreadyExistsException("Email already exists")
-        }
 
         val role = if (request.role != null && (request.role == "ADMIN" || request.role == "USER")) {
             Role.valueOf(request.role)
@@ -46,9 +45,8 @@ class AuthService(
         val user = authRepository.findByEmail(request.email)
             .orElseThrow { UsernameNotFoundException("Invalid email or password") }
 
-        if (!passwordEncoder.matches(request.password, user.password)) {
+        if (!passwordEncoder.matches(request.password, user.password))
             throw BadCredentialsException("Invalid email or password")
-        }
 
         user.sessionId = sessionId
         user.sessionExpiration = LocalDateTime.now().plusMinutes(20)
@@ -57,10 +55,6 @@ class AuthService(
     }
 
     fun logout(sessionId: String) {
-        if (sessionId.isBlank()) {
-            throw IllegalArgumentException("Session ID is required")
-        }
-
         val user = authRepository.findBySessionId(sessionId)
             .orElseThrow { IllegalArgumentException("Invalid session ID") }
 
