@@ -70,21 +70,22 @@ The following configurations are required to launch the project:
 
 - **Register**: [http://localhost:8080/api/v1/auth/register](http://localhost:8080/api/v1/auth/register)
     - `POST`: Registers a new user. Returns a `SESSION_ID` cookie.
-      User Registration Request Body:
-  ```json lines
-    {
-     "name": "User",
-     "email": "user@example.com",
-     "password": "secret123456"
-     }
-  ```
-  Admin Registration Request Body:
+   Admin Registration Request Body:
 ```json lines
     {
       "name": "Admin", 
       "email": "admin@example.com",
       "password": "secret12345678",
       "role": "ADMIN"
+     }
+  ```
+
+  User Registration Request Body:
+  ```json lines
+    {
+     "name": "User",
+     "email": "user@example.com",
+     "password": "secret123456"
      }
   ```
 
@@ -104,10 +105,7 @@ The following configurations are required to launch the project:
 
 #### Important:
 
-#### After successful authentication, you receive a valid
-`SESSION_ID` cookie (HTTP-only, expires after 30 minutes). Include this cookie automatically for all subsequent requests:
-
-`SESSION_ID` cookie expired after 30 minutes for all subsequent requests:
+#### After successful authentication, you receive a valid `SESSION_ID` cookie (HTTP-only, expires after 30 minutes). Include this cookie automatically for all subsequent requests.
 
 ---
 
@@ -116,7 +114,7 @@ The following configurations are required to launch the project:
 - **Get All User Contacts with Pagination**: [http://localhost:8080/api/v1/phonebooks/contacts/user/{id}?page=0&size=15&sort=name,asc](http://localhost:8080/api/v1/phonebooks/contacts/user/{id}?page=0&size=15&sort=name,asc)
     - `GET`: Retrieves all contacts belonging to the authenticated user with pagination support.
     - Parameters:
-      - `id` - User ID (must match authenticated user)
+      - `id` - User ID (must match authenticated user), for example "id": "1"
       - `page` - Page number (default: 0)
       - `size` - Items per page (default: 15)
       - `sort` - Sort field and direction, e.g., name,asc or number,desc
@@ -192,7 +190,7 @@ The following configurations are required to launch the project:
 - **Search Users by Name with Pagination**: [http://localhost:8080/api/v1/phonebooks/users/names/{name}?page=0&size=10&sort=name,asc](http://localhost:8080/api/v1/phonebooks/users/names/{name}?page=0&size=10&sort=name,asc)
     - `GET`: Searches for users whose name starts with the specified string **(Admin only)**.
     - Parameters:
-        - `name` - Name prefix to search
+        - `name` - Name prefix to search (e.g., "a" or "Bob")
         - `page` - Page number (default: 0)
         - `size` - Items per page (default: 10)
         - `sort` - Sort field and direction
