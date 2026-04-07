@@ -7,7 +7,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import java.io.Serializable
 
 @Entity
-@Table(name = "contacts")
+@Table(
+    name = "contacts",
+    indexes = [
+        Index(name = "idx_contacts_phonebook_id", columnList = "phonebook_id"),
+        Index(name = "idx_contacts_name", columnList = "name"),
+        Index(name = "idx_contacts_number", columnList = "number")
+    ]
+)
 data class Contact(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

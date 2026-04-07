@@ -8,7 +8,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "users")
+@Table(
+    name = "users",
+    indexes = [
+        Index(name = "idx_users_session_id", columnList = "session_id"),
+        Index(name = "idx_users_name", columnList = "name")]
+)
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +27,7 @@ data class User(
 
     @get:JvmName("user_password")
     @Column(nullable = false)
-    val password: String,
+    private val password: String,
 
     @Column(name = "session_id", nullable = true)
     var sessionId: String? = null,
@@ -39,38 +44,33 @@ data class User(
     @JoinColumn(name = "phonebook_id", nullable = false)
     val phoneBook: PhoneBook? = null
 ) : UserDetails {
-    @JsonIgnore
-    override fun getAuthorities(): Collection<GrantedAuthority> {
-        return listOf(SimpleGrantedAuthority(role.authority))
-    }
 
     @JsonIgnore
-    override fun getUsername(): String {
-        return email
-    }
+    override fun getAuthorities(): Collection<GrantedAuthority> = listOf(SimpleGrantedAuthority(role.authority))
 
     @JsonIgnore
-    override fun getPassword(): String {
-        return password
-    }
+    override fun getUsername(): String = email
 
     @JsonIgnore
-    override fun isAccountNonExpired(): Boolean {
-        return true
-    }
+    override fun getPassword(): String = password
 
     @JsonIgnore
-    override fun isAccountNonLocked(): Boolean {
-        return true
-    }
+    override fun isAccountNonExpired(): Boolean = true
 
     @JsonIgnore
-    override fun isCredentialsNonExpired(): Boolean {
-        return true
-    }
+    override fun isAccountNonLocked(): Boolean = true
 
     @JsonIgnore
-    override fun isEnabled(): Boolean {
-        return true
+    override fun isCredentialsNonExpired(): Boolean = true
+
+    @JsonIgnore
+    override fun isEnabled(): Boolean = true
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is User) return false
+        return id == other.id
     }
+
+    override fun hashCode(): Int = id?.hashCode() ?: 0
 }

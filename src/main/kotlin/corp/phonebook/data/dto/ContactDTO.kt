@@ -13,7 +13,4 @@ data class ContactDTO(
     @field:NotBlank(message = "Number cannot be blank")
     @field:Pattern(regexp = "^\\s*\\+?\\s*[\\d\\s]{3,15}\\s*$", message = "Invalid phone number format")
     val number: String,
-
-    @field:NotNull(message = "Phonebook ID cannot be null")
-    val phonebookId: Long
 )

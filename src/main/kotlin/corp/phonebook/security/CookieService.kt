@@ -1,4 +1,4 @@
-package corp.phonebook.config
+package corp.phonebook.security
 
 import org.springframework.stereotype.Service
 import jakarta.servlet.http.Cookie
@@ -14,18 +14,21 @@ class CookieService {
         val sessionCookie = Cookie("SESSION_ID", sessionId).apply {
             isHttpOnly = true
             path = "/"
-            maxAge = 60 * 20
+            maxAge = 60 * 30
         }
         response.addCookie(sessionCookie)
 
-        val expirationTime = LocalDateTime.now().plusMinutes(20)
+        val expirationTime = LocalDateTime.now().plusMinutes(30)
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-        val formattedExpirationTime = URLEncoder.encode(expirationTime.format(formatter), StandardCharsets.UTF_8)
+        val formattedExpirationTime = URLEncoder.encode(
+            expirationTime.format(formatter),
+            StandardCharsets.UTF_8
+        )
 
         val expirationCookie = Cookie("EXPIRED_COOKIE", formattedExpirationTime).apply {
             isHttpOnly = true
             path = "/"
-            maxAge = 60 * 20
+            maxAge = 60 * 30
         }
         response.addCookie(expirationCookie)
     }

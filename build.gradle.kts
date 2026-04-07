@@ -1,17 +1,18 @@
 plugins {
-	kotlin("jvm") version "1.9.25"
-	kotlin("plugin.spring") version "1.9.25"
-	id("org.springframework.boot") version "3.4.2"
+	id("org.springframework.boot") version "4.0.2"
 	id("io.spring.dependency-management") version "1.1.7"
-	kotlin("plugin.jpa") version "1.9.25"
+	kotlin("jvm") version "2.3.0"
+	kotlin("plugin.spring") version "2.3.0"
+	// no-args constructor Hibernate
+	kotlin("plugin.jpa") version "2.3.0"
 }
 
 group = "corp.phonebook"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0"
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
+		languageVersion = JavaLanguageVersion.of(25)
 	}
 }
 
@@ -27,7 +28,7 @@ dependencies {
 	// Spring Data
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	// Flyway
-	implementation("org.flywaydb:flyway-core")
+	implementation("org.springframework.boot:spring-boot-starter-flyway")
 	implementation("org.flywaydb:flyway-database-postgresql")
 	// PostgreSQL
 	implementation("org.postgresql:postgresql")
@@ -59,9 +60,4 @@ allOpen {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
-}
-
-tasks.bootJar {
-	archiveFileName.set("${archiveBaseName.get()}.jar")
-	destinationDirectory.set(file("$rootDir"))
 }

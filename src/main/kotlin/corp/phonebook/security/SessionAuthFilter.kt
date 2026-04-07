@@ -1,4 +1,4 @@
-package corp.phonebook.config
+package corp.phonebook.security
 
 import org.springframework.stereotype.Component
 import jakarta.servlet.FilterChain
@@ -20,6 +20,13 @@ class SessionAuthFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
+        val path = request.requestURI
+
+        if (path.contains("/auth/register") || path.contains("/auth/login")) {
+            filterChain.doFilter(request, response)
+            return
+        }
+
         val sessionCookie = request.cookies?.find { it.name == "SESSION_ID" }
 
         if (sessionCookie == null) {
@@ -28,6 +35,7 @@ class SessionAuthFilter(
         }
 
         val sessionId = sessionCookie.value
+
         if (sessionService.isSessionExpired(sessionId)) {
             filterChain.doFilter(request, response)
             return
@@ -40,9 +48,13 @@ class SessionAuthFilter(
         }
 
         val user = userOptional.get()
+
         val authentication = UsernamePasswordAuthenticationToken(
-            user, null, user.authorities
+            user,
+            null,
+            user.authorities
         )
+
         SecurityContextHolder.getContext().authentication = authentication
 
         filterChain.doFilter(request, response)

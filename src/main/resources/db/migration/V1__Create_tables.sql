@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
     CONSTRAINT fk_phonebook_user FOREIGN KEY (phonebook_id) REFERENCES phonebooks(id) ON DELETE CASCADE
 );
 
-CREATE TABLE contacts (
+CREATE TABLE IF NOT EXISTS contacts (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     number VARCHAR(20) NOT NULL CHECK (number ~ '^\s*\+?\s*[\d\s]{3,15}\s*$'),
@@ -22,6 +22,13 @@ CREATE TABLE contacts (
     CONSTRAINT fk_phonebook_contact FOREIGN KEY (phonebook_id) REFERENCES phonebooks(id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS user_audit (
+    id BIGSERIAL PRIMARY KEY,
+    operation VARCHAR(20) NOT NULL,
+    user_id BIGINT,
+    user_email VARCHAR(255) NOT NULL,
+    operation_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE OR REPLACE FUNCTION auto_create_phonebook()
 RETURNS TRIGGER AS $$

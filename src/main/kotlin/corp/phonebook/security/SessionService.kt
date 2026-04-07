@@ -1,24 +1,29 @@
-package corp.phonebook.config
+package corp.phonebook.security
 
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import corp.phonebook.data.repository.AuthRepository
 
-@Component
+@Service
 class SessionService(
     private val authRepository: AuthRepository
 ) {
-
     fun isSessionExpired(sessionId: String): Boolean {
-        if (sessionId.isBlank()) return true
+        if (sessionId.isBlank()) {
+            return true
+        }
 
         val userOptional = authRepository.findBySessionId(sessionId)
-        if (userOptional.isEmpty) return true
+        if (userOptional.isEmpty) {
+            return true
+        }
 
         val user = userOptional.get()
         val now = LocalDateTime.now()
-
         val sessionExpiration = user.sessionExpiration
-        return sessionExpiration == null || sessionExpiration.isBefore(now)
+
+        val isExpired = sessionExpiration == null || sessionExpiration.isBefore(now)
+
+        return isExpired
     }
 }
